@@ -19,45 +19,52 @@ It combines **batch + streaming workloads** and showcases how Spark can be used 
 ---
 
 ## 📂 Project Structure
-Distributed_Systems_Workflow_Optimizer/
-│── data/ # Graph input data (CSV)
-│── out/ # Streaming output (word counts)
-│── scripts/ # Utility shell scripts for running jobs
-│── src/ # Core PySpark programs
-│ ├── dijkstra_spark.py
-│ ├── streaming_checkpoint_demo.py
-│── tmp/ # Temporary directory for input/checkpoints
-│ ├── stream_in/ # Streaming input files
-│ ├── chk/ # Checkpoint directory
-│── README.md # Project documentation
-│── notebook.ipynb # End-to-end runnable notebook (Colab)
 
+Distributed_Systems_Workflow_Optimizer/  
+├── data/                # Graph input data (CSV)  
+├── out/                 # Streaming output (word counts)  
+├── scripts/             # Utility shell scripts for running jobs  
+├── src/                 # Core PySpark programs  
+│   ├── dijkstra_spark.py  
+│   └── streaming_checkpoint_demo.py  
+├── tmp/                 # Temporary directory for input/checkpoints  
+│   ├── stream_in/       # Streaming input files  
+│   └── chk/             # Checkpoint directory  
+├── README.md            # Project documentation  
+└── notebook.ipynb       # End-to-end runnable notebook (Colab)  
 
 ---
 
 ## 🛠️ How It Works
 
-### 1. **Graph Optimization (Batch Mode)**
-Run shortest path computation:
+### 1. Graph Optimization (Batch Mode)
 
+Run shortest path computation:  
+
+```bash
 !python src/dijkstra_spark.py --input data/graph_edges.csv --source A --destination Z
+```
 
-2. Streaming WordCount (with Checkpointing)
+### 2. Streaming WordCount (with Checkpointing)
 
 Start the streaming job:
 
+```bash
 !python src/streaming_checkpoint_demo.py \
   --inputDir tmp/stream_in \
   --checkpointDir tmp/chk \
   --triggerSec 5
+```
 
 Feed streaming input while job is running:
 
+```bash
 !echo "hello spark streaming test" > tmp/stream_in/batch1.txt
 !echo "spark streaming checkpoint recovery" > tmp/stream_in/batch2.txt
+```
 
-Spark will process these files in micro-batches and update word counts.
-Checkpointing ensures recovery if the job crashes and restarts.
+- ✅Spark will process these files in micro-batches and update word counts.
+- ✅Checkpointing ensures recovery if the job crashes and restarts.
 
 ## 📌 Why This Project is Important
 
