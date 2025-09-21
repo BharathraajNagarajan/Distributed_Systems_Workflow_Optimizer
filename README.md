@@ -59,42 +59,40 @@ Feed streaming input while job is running:
 Spark will process these files in micro-batches and update word counts.
 Checkpointing ensures recovery if the job crashes and restarts.
 
-📊 Why This Project is Important
+## 📌 Why This Project is Important
 
-Shows how distributed graph algorithms (like Dijkstra) scale on big datasets with Spark.
+- Shows how distributed graph algorithms (like Dijkstra) scale on big datasets with Spark.  
+- Demonstrates fault tolerance in streaming, critical for production pipelines (finance, IoT, logging, fraud detection, etc.).  
+- Provides a Colab-ready workflow, lowering barriers for testing Spark-based distributed systems.  
 
-Demonstrates fault tolerance in streaming, critical for production pipelines (finance, IoT, logging, fraud detection, etc.).
+---
 
-Provides a Colab-ready workflow, lowering barriers for testing Spark-based distributed systems.
-
-⚠️ Difficulties Faced
+## ⚠️ Difficulties Faced
 
 We encountered multiple real-world debugging challenges:
 
-❌ Concurrent Queries Error – Spark threw SparkConcurrentModificationException when multiple queries used the same checkpoint.
+❌ **Concurrent Queries Error** – Spark threw `SparkConcurrentModificationException` when multiple queries used the same checkpoint.  
 
-❌ Output Modes Mismatch – Writing to Parquet with complete mode caused errors; required using append mode.
+❌ **Output Modes Mismatch** – Writing to Parquet with *complete mode* caused errors; required using *append mode*.  
 
-❌ Colab Limitation – Couldn’t run two cells in parallel (stream job + data feeding). We solved this by pre-creating input batches before starting the job.
+❌ **Colab Limitation** – Couldn’t run two cells in parallel (stream job + data feeding). We solved this by pre-creating input batches before starting the job.  
 
-❌ File Path Issues – Misplaced script files weren’t included in the zip until we confirmed proper saving in /content/Distributed_Systems_Workflow_Optimizer/scripts.
+❌ **File Path Issues** – Misplaced script files weren’t included in the zip until we confirmed proper saving in  
+`/content/Distributed_Systems_Workflow_Optimizer/scripts`.  
 
-❌ Git Push Authentication – Faced credential issues in Colab; resolved by downloading locally and pushing manually.
+❌ **Git Push Authentication** – Faced credential issues in Colab; solved by downloading locally and pushing manually.  
 
-These reflect the practical hurdles in distributed systems, reinforcing concepts beyond just code.
+➡️ These reflect the practical hurdles in distributed systems, reinforcing concepts beyond just code.  
 
-📈 Future Improvements
+---
 
-Add Kafka source for real-time streaming instead of file-based.
+## 📑 Future Improvements
 
-Extend graph optimizer to handle weighted directed acyclic graphs and multi-source shortest paths.
+- Add Kafka source for real-time streaming instead of file-based.  
+- Extend graph optimizer to handle weighted directed acyclic graphs and multi-source shortest paths.  
+- Build a Dockerfile for easier reproducibility outside Colab.
 
-Build a Dockerfile for easier reproducibility outside Colab.
 
 👤 Author
-
 Bharathraaj Nagarajan
-MPS Data Science, University at Buffalo
-LinkedIn
- | GitHub
 
